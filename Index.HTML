@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="style.css">
+<title>Lower Hutt Events Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+ :root {
+  --ink: #0e0d0b;
+  --cream: #f5f0e8;
+  --gold: #df9104;
+  --gold-light: #fcaf17;
+  --muted: #7a7268;
+  --rust: #ec008c;
+  --rust-dark: #3d2466;
+  --section-bg: #f0ebe0;
+  --section-dark: #0f0e0c;
+  --lhec-img: url('https://amayaliving.co.nz/wp-content/uploads/2026/01/Event-Space-2-south-1.jpg');
+}
+/* rest of your CSS exactly as it is */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-serif; font-weight: 300; overflow-x: hidden; }
+/* ═══════════════════════════════════════════
+   NAV — identical to homepage
+═══════════════════════════════════════════ */
+ nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    display: flex; align-items: stretch;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+ 
+    /* ✦ Taller nav to give logo room */
+    height: 88px;
+  }
+ 
+  .nav-logo-wrap {
+    display: flex; align-items: center;
+    /* ✦ More vertical padding + wider slot */
+    padding: 10px 36px;
+    border-right: 1px solid rgba(255,255,255,.07);
+    flex-shrink: 0;
+ 
+    /* ✦ Subtle gold left-border accent so logo area feels premium */
+    border-left: 3px solid var(--gold);
+    background: rgba(184,151,90,.04);
+  }
+ 
+  .nav-logo-wrap img {
+    /* ✦ Bigger: was 68px, now 72px height with no filter so gold shows */
+    height: 160px;
+    width: auto;
+    object-fit: contain;
+    /* removed brightness(0) invert so the real logo colours show */
+    /* if your logo is dark-on-white, keep the filter line below instead: */
+    /* filter: brightness(0) invert(1); */
+    filter: brightness(0) invert(1);
+  }
+ 
+  /* ── everything below is UNCHANGED from your original ── */
+  .nav-menu { display: flex; align-items: stretch; list-style: none; flex: 1; }
+  .nav-menu li { display: flex; align-items: stretch; position: relative; }
+  .nav-menu a {
+    display: flex; align-items: center; padding: 0 18px;
+    color: #e8e4dc; text-decoration: none;
+    font-family: 'Jost'; font-size: .90rem; font-weight: 500; letter-spacing: .04em;
+    white-space: nowrap; position: relative; transition: color .25s, background .25s;
+  }
+  .nav-menu a::after {
+    content: ''; position: absolute; bottom: 0; left: 18px; right: 18px;
+    height: 2px; background: var(--rust);
+    transform: scaleX(0); transform-origin: left; transition: transform .28s ease;
+  }
+  .nav-menu a:hover { color: #fff; background: rgba(255,255,255,.04); }
+  .nav-menu a:hover::after { transform: scaleX(1); }
+  .nav-menu a.active-page { color: var(--gold); }
+  .nav-menu a.active-page::after { transform: scaleX(1); background: var(--gold); }
+ 
+  /* Dropdown */
+  .nav-menu li:hover .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
+  .dropdown {
+    position: absolute; top: 100%; left: 0; min-width: 240px;
+    background: #1a1a1a; border: 1px solid rgba(255,255,255,.07);
+    border-top: 2px solid var(--rust);
+    opacity: 0; pointer-events: none; transform: translateY(8px);
+    transition: opacity .25s, transform .25s;
+    z-index: 600;
+  }
+  .dropdown a {
+    padding: 11px 20px; font-size: .90rem; border-bottom: 1px solid rgba(255,255,255,.04);
+    display: block;
+  }
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown .sub-dropdown {
+    position: absolute; left: 100%; top: 0; min-width: 200px;
+    background: #222; border: 1px solid rgba(255,255,255,.07);
+    opacity: 0; pointer-events: none; transform: translateX(8px);
+    transition: opacity .25s, transform .25s;
+  }
+  .dropdown li:hover .sub-dropdown { opacity: 1; pointer-events: all; transform: translateX(0); }
+  .dropdown li { position: relative; flex-direction: column; }
+  .dropdown li a { width: 100%; }
+ 
+  .nav-cta-wrap { display: flex; align-items: center; padding: 0 20px; flex-shrink: 0; }
+  .nav-cta {
+    font-size: .7rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+    color: #fff; background: var(--rust); padding: 9px 22px;
+    text-decoration: none; transition: background .25s;
+  }
+  .nav-cta:hover { background: var(--rust-dark); }
+
+
+  /* ══════════════════════════
+     HERO
+  ══════════════════════════ */
+  .hero {
+    position: relative;
+    height: calc(100vh - 64px);
+    margin-top: 64px;
+    min-height: 620px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow: hidden;
+  }
+ 
+  /* ── OLD single .hero-img replaced by slider (see below) ── */
+ 
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(
+      to right,
+      rgba(4,3,2,0.97) 0%,
+      rgba(4,3,2,0.80) 25%,
+      rgba(4,3,2,0.0) 50%
+    );
+    pointer-events: none;
+  }
+  .hero-overlay::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(4,3,2,.5) 0%, transparent 55%);
+  }
+ 
+  .hero-rule {
+    position: absolute; top: 60px; left: 60px; z-index: 5;
+    width: 1px; height: 0;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: growR 1.1s .5s forwards;
+  }
+  @keyframes growR { to { height: 80px; } }
+ 
+  .hero-content { position: relative; z-index: 3; padding: 0 60px 96px; max-width: 760px; }
+ 
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 13px;
+    font-size: .6rem; letter-spacing: .46em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 18px; opacity: 0; animation: up .7s .5s forwards;
+  }
+  .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
+ 
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(3rem, 6vw, 6.8rem);
+    line-height: .95; letter-spacing: -.01em; margin-bottom: 24px;
+    opacity: 0; animation: up .9s .65s forwards;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold-light); display: block; }
+ 
+  .hero-sub {
+    font-size: .89rem; font-weight: 300; color: rgba(245,240,232,.6);
+    line-height: 1.85; max-width: 440px; margin-bottom: 38px;
+    opacity: 0; animation: up .7s .85s forwards;
+  }
+  .hero-btns { display: flex; align-items: center; gap: 26px; opacity: 0; animation: up .7s 1.0s forwards; }
+ 
+  .btn-gold { background: var(--gold); color: var(--ink); padding: 14px 42px; font-family: 'Jost'; font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; transition: background .3s, transform .2s; display: inline-block; }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-line { color: rgba(245,240,232,.62); font-size: .7rem; letter-spacing: .17em; text-transform: uppercase; text-decoration: none; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid rgba(184,151,90,.32); padding-bottom: 3px; transition: color .3s, border-color .3s; }
+  .btn-line:hover { color: var(--cream); border-color: var(--gold); }
+ 
+  .hero-stats {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+    display: grid; grid-template-columns: repeat(4,1fr);
+    border-top: 1px solid rgba(184,151,90,.18);
+    opacity: 0; animation: up .6s 1.2s forwards;
+  }
+  .hero-stat { padding: 16px 61px; background: rgba(4,3,2,.78); backdrop-filter: blur(14px); border-right: 1px solid rgba(184,151,90,.1); display: flex; flex-direction: column; gap: 3px; }
+  .hero-stat:last-child { border-right: none; }
+  .hs-n { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--gold); line-height: 1; }
+  .hs-l {  letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+ 
+  /* ── scroll-hint: now the animated slider line ── */
+  .scroll-hint {
+    position: absolute; right: 60px; bottom: 119px; z-index: 6;
+    display: flex; flex-direction: column; align-items: center; gap: 9px;
+    opacity: 0; animation: fi .8s 1.5s forwards;
+  }
+  .scroll-hint span { font-size: .70rem;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 300;
+    writing-mode: vertical-rl; }
+ 
+  /* The line — now acts as slide progress indicator */
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: rgba(184,151,90,.22);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: slideProgress var(--slide-duration, 5s) linear infinite;
+  }
+  @keyframes slideProgress {
+    0%   { top: -100%; opacity: 1; }
+    85%  { top: 100%;  opacity: 1; }
+    100% { top: 100%;  opacity: 0; }
+  }
+ 
+  @keyframes up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fi  { from{opacity:0} to{opacity:1} }
+ 
+  /* ══════════════════════════
+       IMAGE SLIDER  (right half)
+  ══════════════════════════ */
+  .hero-slider {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+ 
+  /* Each slide fills the full hero area; left 50% is covered by overlay gradient */
+  .slide {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center 35%;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 1.1s cubic-bezier(.4,0,.2,1), transform 6s ease-out;
+  }
+  .slide.active {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+  /* Subtle Ken-Burns exit for leaving slide */
+  .slide.leaving {
+    opacity: 0;
+    transform: scale(1.04);
+    transition: opacity 1.1s cubic-bezier(.4,0,.2,1), transform 1.1s ease-in;
+  }
+ 
+  /* Slide counter top-right */
+  .slide-counter {
+    position: absolute;
+    top: 60px; right: 60px;
+    z-index: 6;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0; animation: fi .8s 1.5s forwards;
+  }
+  .sc-current {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300;
+    color: var(--gold); line-height: 1;
+  }
+  .sc-sep { width: 24px; height: 1px; background: rgba(184,151,90,.4); }
+  .sc-total { font-size: .58rem; letter-spacing: .3em; color: var(--muted); }
+ 
+  /* Dot nav — stacked vertically on right edge */
+  .slide-dots {
+    position: absolute;
+    right: 60px; top: 50%;
+    transform: translateY(-50%);
+    z-index: 6;
+    display: flex; flex-direction: column; gap: 10px;
+    opacity: 0; animation: fi .8s 1.7s forwards;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(184,151,90,.3);
+    border: 1px solid rgba(184,151,90,.5);
+    cursor: pointer;
+    transition: background .3s, transform .3s;
+  }
+  .dot.active {
+    background: var(--gold);
+    transform: scale(1.4);
+  }
+
+  /* ══════════════════════════
+     MARQUEE
+  ══════════════════════════ */
+  .marquee-band { background: var(--gold); padding: 12px 0; overflow: hidden; }
+  .marquee-track { display: flex; width: max-content; animation: roll 28s linear infinite; }
+  .marquee-track:hover { animation-play-state: paused; }
+  .m-item { font-family: 'Jost'; font-size: .58rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--ink); white-space: nowrap; padding: 0 36px; display: flex; align-items: center; }
+  .m-item::after { content: '✦'; margin-left: 36px; font-size: .38rem; color: rgba(14,13,11,.28); }
+  @keyframes roll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* ══════════════════════════
+     SHARED
+  ══════════════════════════ */
+  .sec-label { display: flex; align-items: center; gap: 11px; font-size: .58rem; letter-spacing: .48em; text-transform: uppercase; color: var(--gold); margin-bottom: 11px; }
+  .sec-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.3rem, 3.8vw, 3.8rem); font-weight: 300; line-height: 1.05; margin-bottom: 48px; }
+  .sec-title em { font-style: italic; color: var(--gold-light); }
+
+  /* ══════════════════════════
+     PROMOTIONS
+  ══════════════════════════ */
+  .promotions { background: var(--section-dark); padding: 96px 60px; }
+
+  .promo-grid { display: grid; grid-template-columns: 1.55fr 1fr 1fr; grid-template-rows: 320px 320px; gap: 3px; }
+
+  .promo-card { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; text-decoration: none; color: var(--cream); }
+  .promo-card.tall { grid-row: span 2; }
+
+  .pc-bg {
+    position: absolute; inset: 0;
+    background-image: var(--lhec-img);
+    background-size: cover;
+    transition: transform .62s ease;
+  }
+  .promo-card.tall         .pc-bg { background-position: center 25%; }
+  .promo-card:nth-child(2) .pc-bg { background-position: 12% 45%; }
+  .promo-card:nth-child(3) .pc-bg { background-position: 88% 35%; }
+  .promo-card:nth-child(4) .pc-bg { background-position: 45% 65%; }
+  .promo-card:nth-child(5) .pc-bg { background-position: 65% 12%; }
+  .promo-card:hover .pc-bg { transform: scale(1.07); }
+
+  .promo-card.tall         .pc-bg::after { content:''; position:absolute; inset:0;  }
+  .promo-card:nth-child(2) .pc-bg::after { content:''; position:absolute; inset:0;  }
+  .promo-card:nth-child(3) .pc-bg::after { content:''; position:absolute; inset:0; }
+  .promo-card:nth-child(4) .pc-bg::after { content:''; position:absolute; inset:0;  }
+  .promo-card:nth-child(5) .pc-bg::after { content:''; position:absolute; inset:0; }
+
+  .pc-ov { position: absolute; inset: 0; z-index: 1; /*background: linear-gradient(to top, rgba(4,3,2,.93) 0%, rgba(4,3,2,.18) 55%, transparent 100%); transition: background .4s;*/ }
+  .promo-card:hover .pc-ov { /*background: linear-gradient(to top, rgba(4,3,2,.97) 0%, rgba(4,3,2,.44) 60%, rgba(4,3,2,.06) 100%);*/ }
+
+  .pc-body { position: relative; z-index: 2; padding: 22px 24px 26px; }
+  .pc-badge { display: inline-flex; align-items: center; gap: 6px; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); background:#3d2466; border: 1px solid rgba(184,151,90,.26); padding: 4px 10px; margin-bottom: 11px; }
+  .pc-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .pc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; line-height: 1.15; margin-bottom: 7px; }
+  .promo-card.tall .pc-name { font-size: 2.1rem; }
+  .pc-desc { font-size: .79rem; color: rgba(245,240,232,.52); line-height: 1.7; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .44s, opacity .38s; }
+  .promo-card:hover .pc-desc { max-height: 70px; opacity: 1; }
+  .pc-cta {     
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 13px;
+    font-size: 0.93rem;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: #000000;
+    transition: gap .3s;
+    font-weight: 400; }
+  .promo-card:hover .pc-cta { gap: 13px; }
+
+  /* ══════════════════════════
+     VENUE GUIDE
+     Card = image on top (no gradient) + clean info strip below
+  ══════════════════════════ */
+  .venue-guide { background: var(--section-bg); color: var(--ink); padding: 96px 60px; }
+  .venue-guide .sec-label { color: #7a5248; }
+  .venue-guide .sec-label::before { background: #7a5248; }
+  .venue-guide .sec-title { color: var(--ink); }
+
+  .vg-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+
+  .vg-card {
+    display: flex; flex-direction: column;
+    text-decoration: none; color: var(--ink);
+    background: var(--section-bg);
+    border: 1px solid rgba(139,76,42,.1);
+    overflow: hidden;
+    transition: box-shadow .3s, transform .3s;
+  }
+  .vg-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1); transform: translateY(-3px); }
+
+  /* Image top portion — no overlay, no gradient */
+  .vg-img-wrap {
+    height: 200px; overflow: hidden; flex-shrink: 0;
+  }
+  .vg-img {
+    width: 100%; height: 100%;
+    background-image: var(--lhec-img);
+    background-size: cover;
+    transition: transform .55s ease;
+  }
+  .vg-card:nth-child(1) .vg-img { background-position: 18% 28%; }
+  .vg-card:nth-child(2) .vg-img { background-position: 50% 18%; }
+  .vg-card:nth-child(3) .vg-img { background-position: 80% 42%; }
+  .vg-card:nth-child(4) .vg-img { background-position: 28% 62%; }
+  .vg-card:hover .vg-img { transform: scale(1.06); }
+
+  /* Clean info strip — exactly like reference screenshot */
+  .vg-info {
+    padding: 18px 20px 22px;
+    border-top: 1px solid rgba(139,76,42,.1);
+    display: flex; flex-direction: column; gap: 0;
+    background: var(--section-bg);
+  }
+  .vg-num { font-size: .54rem; letter-spacing: .38em; text-transform: uppercase; color: #7a5248; margin-bottom: 7px; }
+  .vg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; margin-bottom: 6px; color: var(--ink); }
+  .vg-cap { font-size: .8rem; color: #7a5c48; display: flex; align-items: center; gap: 8px; letter-spacing: .05em; margin-bottom: 10px; }
+  .vg-cap::before { content: '—'; color: #7a5248; font-size: .7rem; }
+  .vg-arrow { display: inline-flex; align-items: center; gap: 5px; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: #7a5248; font-weight: 500; transition: gap .3s; }
+  .vg-card:hover .vg-arrow { gap: 10px; }
+
+  /* ══════════════════════════
+     EVENT IDEAS
+  ══════════════════════════ */
+  .event-ideas { background: var(--ink); padding: 96px 60px; }
+  .ei-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+  .ei-all { font-size: .90rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(245,240,232,.35); text-decoration: none; border-bottom: 1px solid rgba(184,151,90,.16); padding-bottom: 3px; transition: color .3s, border-color .3s; }
+  .ei-all:hover { color: var(--gold); border-color: var(--gold); }
+  .ei-list { display: flex; flex-direction: column; }
+  .ei-item { display: grid; grid-template-columns: 70px 1fr 1fr auto; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(184,151,90,.09); text-decoration: none; color: var(--cream); position: relative; overflow: hidden; transition: padding-left .34s; }
+  .ei-item::before { content: ''; position: absolute; inset: 0; width: 0; background: rgba(184,151,90,.04); transition: width .38s; }
+  .ei-item:hover { padding-left: 10px; }
+  .ei-item:hover::before { width: 100%; }
+  .ei-item:first-child { border-top: 1px solid rgba(184,151,90,.09); }
+  .ei-n { font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 300; color: rgba(255, 255, 255, 0.889); line-height: 1; transition: color .3s; }
+  .ei-item:hover .ei-n { color: rgba(184,151,90,.3); }
+  .ei-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; transition: color .3s; }
+  .ei-item:hover .ei-name { color: var(--gold-light); }
+  .ei-desc { font-size: .93rem; color: rgba(245,240,232,.36); line-height: 1.6; padding: 0 34px; transition: color .3s; }
+  .ei-item:hover .ei-desc { color: rgba(245,240,232,.6); }
+  .ei-arr { width: 36px; height: 36px; border: 1px solid rgba(184,151,90,.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: .82rem; transform: rotate(-45deg); transition: transform .3s, background .3s, border-color .3s; }
+  .ei-item:hover .ei-arr { transform: rotate(0); background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+  /* ══════════════════════════
+     FOOTER
+  ══════════════════════════ */
+ 
+</style>
+</head>
+<body>
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nav-logo-wrap">
+    <img src="https://amayaliving.co.nz/wp-content/uploads/2025/12/5-2.png" alt="Lower Hutt Events Centre"/>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#"  class="active-page" >Home</a></li>
+    <li>
+      <a href="#" class="">Plan Your Event</a>
+      <ul class="dropdown">
+        <li><a href="#">Conferencing & Events</a></li>
+        <li><a href="#">Indian Weddings</a></li>
+        <li>
+          <a href="#">Packages ›</a>
+          <ul class="sub-dropdown">
+            <li><a href="#">All Packages</a></li>
+            <li><a href="#">Day Delegate</a></li>
+            <li><a href="#">Wedding</a></li>
+            <li><a href="#">School Ball</a></li>
+            <li><a href="#">Christmas</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Food & Beverage ›</a>
+          <ul class="sub-dropdown">
+            <li><a href="#">Catering</a></li>
+            <li><a href="#">Tūtaki Café</a></li>
+            <li><a href="#">Grazie Restaurant</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Equipment & Technology</a></li>
+        <li><a href="#">Transport</a></li>
+        <li><a href="#">Accommodation</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Venue</a>
+      <ul class="dropdown">
+        <li><a href="EventSpace.html">Event Space</a></li>
+        <li><a href="TownHall.html">Town Hall</a></li>
+        <li><a href="MeetingRooms.html">Meeting Rooms</a></li>
+        <li><a href="Atrium.html">Atrium</a></li>
+        <li><a href="TūtakiCafé.html">Tūtaki Café</a></li>
+        <li><a href="Accommodation.html">Accommodation</a></li>
+        <li><a href="FAQs.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="whtason.HTML">What's On</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li>
+      <a href="about.html">About</a>
+    </li>
+    <li>
+      <a href="Contact.html">Contact</a>
+    </li>
+    <li><a href="#">CSR</a></li>
+  </ul>
+  <div class="nav-cta-wrap">
+    <a href="Contact.html" class="nav-cta">Enquire Now</a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+ 
+  <!-- ★ NEW: 6-image slider (replaces single .hero-img) -->
+  <div class="hero-slider" id="heroSlider">
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1600&q=80')"></div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80')"></div>
+  </div>
+ 
+  <!-- Slide counter top-right -->
+  <div class="slide-counter">
+    <span class="sc-current" id="scCurrent">01</span>
+    <span class="sc-sep"></span>
+    <span class="sc-total">06</span>
+  </div>
+ 
+  <!-- Dot navigation -->
+  <div class="slide-dots" id="slideDots"></div>
+ 
+  <!-- Overlay gradient (unchanged) -->
+  <div class="hero-overlay"></div>
+ 
+  <!-- Vertical rule (unchanged) -->
+  <div class="hero-rule"></div>
+ 
+  <!-- Content (unchanged) -->
+  <div class="hero-content">
+    <p class="hero-eyebrow">Along Te Awa Kairangi &nbsp;·&nbsp; Wellington, New Zealand</p>
+    <h1 class="hero-h1">
+      Lower Hutt's<br>
+      <em>New Meeting</em>
+      Place.
+    </h1>
+    <p class="hero-sub">Guided by manaakitanga — every conference, wedding, and gathering is shaped with care, distinction, and genuine warmth.</p>
+    <div class="hero-btns">
+      <a href="#promotions" class="btn-gold">Plan Your Event</a>
+      <a href="#venues" class="btn-line">Explore Venues →</a>
+    </div>
+  </div>
+ 
+  <!-- Stats bar (unchanged) -->
+  <div class="hero-stats">
+    <div class="hero-stat"><span class="hs-n">900+</span><span class="hs-l">Max Capacity</span></div>
+    <div class="hero-stat"><span class="hs-n">4</span><span class="hs-l">Distinct Spaces</span></div>
+    <div class="hero-stat"><span class="hs-n">Gold</span><span class="hs-l">QualMark Certified</span></div>
+    <div class="hero-stat"><span class="hs-n">3</span><span class="hs-l">Dining Options</span></div>
+  </div>
+ 
+  <!-- Scroll hint with animated line (unchanged markup, enhanced line) -->
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span class="m-item">Conferences & Meetings</span><span class="m-item">Weddings & Celebrations</span><span class="m-item">Gala Dinners</span><span class="m-item">Trade Shows</span><span class="m-item">Concerts & Theatre</span><span class="m-item">School Balls</span><span class="m-item">Exhibitions</span><span class="m-item">QualMark Gold Certified</span><span class="m-item">Conferences & Meetings</span><span class="m-item">Weddings & Celebrations</span><span class="m-item">Gala Dinners</span><span class="m-item">Trade Shows</span><span class="m-item">Concerts & Theatre</span><span class="m-item">School Balls</span><span class="m-item">Exhibitions</span><span class="m-item">QualMark Gold Certified</span>
+  </div>
+</div>
+
+<!-- ══ PROMOTIONS ══ -->
+<section class="promotions" id="promotions">
+  <div class="reveal">
+    <p class="sec-label">Current Offers</p>
+    <h2 class="sec-title">Our <em>Promotions</em></h2>
+  </div>
+  <div class="promo-grid reveal">
+    <div class="promo-card tall">
+      <div class="pc-bg"></div><div class="pc-ov"></div>
+      <div class="pc-body">
+        <div class="pc-badge"><span class="dot"></span>Hot Deal</div>
+        <h3 class="pc-name">Day Delegate<br>Package</h3>
+        
+        <span class="pc-cta">View Package →</span>
+      </div>
+    </div>
+    <div class="promo-card">
+      <div class="pc-bg"></div><div class="pc-ov"></div>
+      <div class="pc-body">
+        <div class="pc-badge"><span class="dot"></span>Explore</div>
+        <h3 class="pc-name">Venue Guide — Our Spaces</h3>
+        
+        <span class="pc-cta">View Guide →</span>
+      </div>
+    </div>
+    <div class="promo-card">
+      <div class="pc-bg"></div><div class="pc-ov"></div>
+      <div class="pc-body">
+        <div class="pc-badge"><span class="dot"></span>Package</div>
+        <h3 class="pc-name">Wedding Package</h3>
+      
+        <span class="pc-cta">Explore →</span>
+      </div>
+    </div>
+    <div class="promo-card">
+      <div class="pc-bg"></div><div class="pc-ov"></div>
+      <div class="pc-body">
+        <div class="pc-badge"><span class="dot"></span>Package</div>
+        <h3 class="pc-name">School Ball </h3>
+       
+        <span class="pc-cta">Book Now →</span>
+      </div>
+    </div>
+    <div class="promo-card">
+      <div class="pc-bg"></div><div class="pc-ov"></div>
+      <div class="pc-body">
+        <div class="pc-badge"><span class="dot"></span>Seasonal</div>
+        <h3 class="pc-name">Christmas Package</h3>
+        
+        <span class="pc-cta">Learn More →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VENUE GUIDE ══ -->
+<section class="venue-guide" id="venues">
+  <div class="reveal">
+    <p class="sec-label">Our Spaces</p>
+    <h2 class="sec-title">Venue <em>Guide</em></h2>
+  </div>
+  <div class="vg-grid">
+
+    <div class="vg-card reveal">
+      <div class="vg-img-wrap"><div class="vg-img"></div></div>
+      <div class="vg-info">
+        <p class="vg-num">01 / Event Space</p>
+        <h3 class="vg-name">Event Space</h3>
+        <p class="vg-cap">150 – 900 Guests</p>
+        <span class="vg-arrow">EXPLORE →</span>
+      </div>
+    </div>
+
+    <div class="vg-card reveal d1">
+      <div class="vg-img-wrap"><div class="vg-img"></div></div>
+      <div class="vg-info">
+        <p class="vg-num">02 / Town Hall</p>
+        <h3 class="vg-name">Town Hall</h3>
+        <p class="vg-cap">150 – 800 Guests</p>
+        <span class="vg-arrow">EXPLORE →</span>
+      </div>
+    </div>
+
+    <div class="vg-card reveal d2">
+      <div class="vg-img-wrap"><div class="vg-img"></div></div>
+      <div class="vg-info">
+        <p class="vg-num">03 / Function</p>
+        <h3 class="vg-name">Meeting Rooms</h3>
+        <p class="vg-cap">10 – 150 Guests</p>
+        <span class="vg-arrow">EXPLORE →</span>
+      </div>
+    </div>
+
+    <div class="vg-card reveal d3">
+      <div class="vg-img-wrap"><div class="vg-img"></div></div>
+      <div class="vg-info">
+        <p class="vg-num">04 / Atrium</p>
+        <h3 class="vg-name">Atrium</h3>
+        <p class="vg-cap">150 – 300 Guests</p>
+        <span class="vg-arrow">EXPLORE →</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ EVENT IDEAS ══ -->
+<section class="event-ideas" id="events">
+  <div class="ei-header reveal">
+    <div>
+      <p class="sec-label">Inspiration</p>
+      <h2 class="sec-title">Event <em>Ideas</em></h2>
+    </div>
+    <a href="#promotions" class="ei-all">View All Events →</a>
+  </div>
+  <div class="ei-list">
+    <a class="ei-item reveal"    href="#promotions"><span class="ei-n">01</span><span class="ei-name">Conferences + Meetings</span><span class="ei-desc">Full AV, dedicated managers, flexible floor plans — book your next conference with us today.</span><span class="ei-arr">↗</span></a>
+    <a class="ei-item reveal d1" href="#promotions"><span class="ei-n">02</span><span class="ei-name">Concerts & Theatre</span><span class="ei-desc">Recitals, public addresses, and theatre performances in our acoustically rich Town Hall.</span><span class="ei-arr">↗</span></a>
+    <a class="ei-item reveal d2" href="#promotions"><span class="ei-n">03</span><span class="ei-name">Gala Dinners</span><span class="ei-desc">Sumptuous, refreshingly unique dishes from our culinary team. Gala dinners are our strength.</span><span class="ei-arr">↗</span></a>
+    <a class="ei-item reveal d1" href="#promotions"><span class="ei-n">04</span><span class="ei-name">Weddings</span><span class="ei-desc">Our team helps plan your special day — choosing the right space at the right price for you.</span><span class="ei-arr">↗</span></a>
+    <a class="ei-item reveal d2" href="#promotions"><span class="ei-n">05</span><span class="ei-name">Trade Shows</span><span class="ei-desc">Exceptional trade shows in a fully equipped, professionally managed events venue.</span><span class="ei-arr">↗</span></a>
+    <a class="ei-item reveal d1" href="#promotions"><span class="ei-n">06</span><span class="ei-name">Exhibitions</span><span class="ei-desc">Organise your next exhibition with ease — large, flexible, fully equipped spaces await.</span><span class="ei-arr">↗</span></a>
+  </div>
+</section>
+<div class="cta-band"><div class="cta-band-content"><p class="cta-band-label">See It In Person</p><h2 class="cta-band-title">Book a <em>Site Visit</em></h2></div><div class="cta-band-actions"><a href="#" class="btn-white">Enquire Now</a><a href="#" class="btn-outline-white">View Venues →</a></div></div>
+<!-- ═══ LHEC FOOTER ═══ -->
+<footer class="lhec-footer">
+ 
+  <!-- main grid -->
+  <div class="lhec-ft-grid">
+ 
+    <!-- col 1 — brand -->
+    <div class="lhec-ft-col lhec-reveal lhec-d1">
+      <img
+        src="https://amayaliving.co.nz/wp-content/uploads/2025/12/5-2.png"
+        class="lhec-ft-logo"
+        alt="Lower Hutt Events Centre"
+      />
+      <p class="lhec-ft-addr">
+        <strong>Find Us</strong>
+        30c Laings Road<br>
+        Lower Hutt, Wellington<br>
+        New Zealand
+      </p>
+      <a href="tel:+6445688120" class="lhec-ft-phone">+64 4 568 8120</a>
+      <div class="lhec-ft-social">
+        <a href="#" aria-label="Facebook">Fb</a>
+        <a href="#" aria-label="Instagram">Ig</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+ 
+    <!-- col 2 — Plan Your Event -->
+    <div class="lhec-ft-col lhec-reveal lhec-d2">
+      <p class="lhec-ft-heading">Plan Your Event</p>
+      <ul class="lhec-ft-links">
+        <li><a href="#">Conferencing &amp; Events</a></li>
+        <li><a href="#">Indian Weddings</a></li>
+        <li><a href="#">Packages</a></li>
+        <li><a href="#">Food &amp; Beverage</a></li>
+        <li><a href="#">Equipment &amp; Tech</a></li>
+        <li><a href="#">Transport</a></li>
+        <li><a href="#">Accommodation</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+ 
+    <!-- col 3 — Venue -->
+    <div class="lhec-ft-col lhec-reveal lhec-d3">
+      <p class="lhec-ft-heading">Venue</p>
+      <ul class="lhec-ft-links">
+        <li><a href="#">Event Space</a></li>
+        <li><a href="#">Town Hall</a></li>
+        <li><a href="#">Meeting Rooms</a></li>
+        <li><a href="#">Atrium</a></li>
+        <li><a href="#">Tūtaki Café</a></li>
+        <li><a href="#">Grazie Restaurant</a></li>
+        <li><a href="#">Sebel Hotel</a></li>
+      </ul>
+    </div>
+ 
+    <!-- col 4 — About -->
+    <div class="lhec-ft-col lhec-reveal lhec-d4">
+      <p class="lhec-ft-heading">About</p>
+      <ul class="lhec-ft-links">
+        <li><a href="#">What's On</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Meet the Team</a></li>
+        <li><a href="#">Te Awakairangi</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Contact Details</a></li>
+        <li><a href="#">Getting Here</a></li>
+        <li><a href="#">Enquiry Form</a></li>
+      </ul>
+    </div>
+ 
+  </div>
+ 
+  <!-- bottom bar -->
+  <div class="lhec-ft-bottom">
+    <p class="lhec-ft-copy">© 2025 Lower Hutt Events Centre. All rights reserved.</p>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span class="lhec-ft-badge">QualMark Gold</span>
+      <span class="lhec-ft-badge">BEIA Silver Member</span>
+    </div>
+  </div>
+ 
+</footer>
+ 
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('lhec-in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.lhec-reveal').forEach(el => obs.observe(el));
+</script>
+<!-- ══ FOOTER ══ -->
+<script>
+  const SLIDE_DURATION = 5000; // ms per slide
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('slideDots');
+  const scCurrent = document.getElementById('scCurrent');
+  let current = 0;
+  let timer;
+ 
+  // Sync CSS animation duration with JS duration
+  document.querySelector('.scroll-line').style.setProperty('--slide-duration', (SLIDE_DURATION / 1000) + 's');
+ 
+  // Build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Slide ' + (i + 1));
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+  });
+ 
+  const dots = () => dotsWrap.querySelectorAll('.dot');
+ 
+  function goTo(next) {
+    if (next === current) return;
+    clearTimeout(timer);
+ 
+    // leaving animation
+    slides[current].classList.remove('active');
+    slides[current].classList.add('leaving');
+    setTimeout(() => slides[current].classList.remove('leaving'), 1200);
+ 
+    // update dots & counter
+    dots()[current].classList.remove('active');
+    current = next;
+    dots()[current].classList.add('active');
+    scCurrent.textContent = String(current + 1).padStart(2, '0');
+ 
+    // enter
+    slides[current].classList.add('active');
+ 
+    // restart the line animation
+    const line = document.querySelector('.scroll-line');
+    line.style.animation = 'none';
+    line.offsetHeight; // reflow
+    line.style.animation = '';
+ 
+    schedule();
+  }
+ 
+  function schedule() {
+    timer = setTimeout(() => goTo((current + 1) % slides.length), SLIDE_DURATION);
+  }
+  schedule();
+</script>
+</body>
+</html>

@@ -155,7 +155,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
  
   .hero-eyebrow {
     display: flex; align-items: center; gap: 13px;
-    font-size: .6rem; letter-spacing: .46em; text-transform: uppercase; color: var(--gold);
+    font-size: .8rem; letter-spacing: .46em; text-transform: uppercase; color: var(--gold);
     margin-bottom: 18px; opacity: 0; animation: up .7s .5s forwards;
   }
   .hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--gold); flex-shrink: 0; }
@@ -311,7 +311,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
   /* ══════════════════════════
      SHARED
   ══════════════════════════ */
-  .sec-label { display: flex; align-items: center; gap: 11px; font-size: .58rem; letter-spacing: .48em; text-transform: uppercase; color: var(--gold); margin-bottom: 11px; }
+  .sec-label { display: flex; align-items: center; gap: 11px; font-size: .78rem; letter-spacing: .48em; text-transform: uppercase; color: var(--gold); margin-bottom: 11px; }
   .sec-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
   .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.3rem, 3.8vw, 3.8rem); font-weight: 300; line-height: 1.05; margin-bottom: 48px; }
   .sec-title em { font-style: italic; color: var(--gold-light); }
@@ -332,11 +332,11 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
     background-size: cover;
     transition: transform .62s ease;
   }
-  .promo-card.tall         .pc-bg { background-position: center 25%; }
+  .promo-card.tall         .pc-bg { background-image:url('images/daydeli.jpg'); background-position: center 25%; }
   .promo-card:nth-child(2) .pc-bg { background-position: 12% 45%; }
-  .promo-card:nth-child(3) .pc-bg { background-position: 88% 35%; }
-  .promo-card:nth-child(4) .pc-bg { background-position: 45% 65%; }
-  .promo-card:nth-child(5) .pc-bg { background-position: 65% 12%; }
+  .promo-card:nth-child(3) .pc-bg { background-image:url('images/wedding.jpg'); 88% 35%; }
+  .promo-card:nth-child(4) .pc-bg { background-image:url('images/schollball.jpg'); background-position: 45% 65%; }
+  .promo-card:nth-child(5) .pc-bg { background-image:url('images/christmas.jpg'); 65% 12%; }
   .promo-card:hover .pc-bg { transform: scale(1.07); }
 
   .promo-card.tall         .pc-bg::after { content:''; position:absolute; inset:0;  }
@@ -399,10 +399,10 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
     background-size: cover;
     transition: transform .55s ease;
   }
-  .vg-card:nth-child(1) .vg-img { background-position: 18% 28%; }
-  .vg-card:nth-child(2) .vg-img { background-position: 50% 18%; }
-  .vg-card:nth-child(3) .vg-img { background-position: 80% 42%; }
-  .vg-card:nth-child(4) .vg-img { background-position: 28% 62%; }
+  .vg-card:nth-child(1) .vg-img { background-image:url('images/hero-gallery.jpg');background-position: 18% 28%; }
+  .vg-card:nth-child(2) .vg-img { background-image:url('images/townhall-home.jpeg');background-position: 50% 18%; }
+  .vg-card:nth-child(3) .vg-img { background-image:url('images/Meeting Room.jpg');background-position: 80% 42%; }
+  .vg-card:nth-child(4) .vg-img {background-image:url('images/Artium.jpg'); background-position: 28% 62%; }
   .vg-card:hover .vg-img { transform: scale(1.06); }
 
   /* Clean info strip — exactly like reference screenshot */
@@ -412,7 +412,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
     display: flex; flex-direction: column; gap: 0;
     background: var(--section-bg);
   }
-  .vg-num { font-size: .54rem; letter-spacing: .38em; text-transform: uppercase; color: #7a5248; margin-bottom: 7px; }
+  .vg-num { font-size: .78rem; letter-spacing: .38em; text-transform: uppercase; color: #7a5248; margin-bottom: 7px; }
   .vg-name { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 400; margin-bottom: 6px; color: var(--ink); }
   .vg-cap { font-size: .8rem; color: #7a5c48; display: flex; align-items: center; gap: 8px; letter-spacing: .05em; margin-bottom: 10px; }
   .vg-cap::before { content: '—'; color: #7a5248; font-size: .7rem; }
@@ -516,12 +516,12 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
  
   <!-- ★ NEW: 6-image slider (replaces single .hero-img) -->
   <div class="hero-slider" id="heroSlider">
-    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1600&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1600&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1600&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1600&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1600&q=80')"></div>
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1600&q=80')"></div>
+    <div class="slide active" style="background-image:url('images/Hero\ Shot.png')"></div>
+    <div class="slide" style="background-image:url('images/Meeting\ Room.jpg')"></div>
+    <div class="slide" style="background-image:url('images/Vintners’Lunch2019--36.jpg')"></div>
+    <div class="slide" style="background-image:url('images/NZHY\ -\ 016.JPG')"></div>
+    <div class="slide" style="background-image:url('images/Artium-hero.jpg')"></div>
+    <div class="slide" style="background-image:url('images/tutaki-hero.jpg')"></div>
   </div>
  
   <!-- Slide counter top-right -->
@@ -590,7 +590,6 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
         <div class="pc-badge"><span class="dot"></span>Hot Deal</div>
         <h3 class="pc-name">Day Delegate<br>Package</h3>
         
-        <span class="pc-cta">View Package →</span>
       </div>
     </div>
     <div class="promo-card">
@@ -599,7 +598,6 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
         <div class="pc-badge"><span class="dot"></span>Explore</div>
         <h3 class="pc-name">Venue Guide — Our Spaces</h3>
         
-        <span class="pc-cta">View Guide →</span>
       </div>
     </div>
     <div class="promo-card">
@@ -608,7 +606,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
         <div class="pc-badge"><span class="dot"></span>Package</div>
         <h3 class="pc-name">Wedding Package</h3>
       
-        <span class="pc-cta">Explore →</span>
+      
       </div>
     </div>
     <div class="promo-card">
@@ -617,7 +615,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
         <div class="pc-badge"><span class="dot"></span>Package</div>
         <h3 class="pc-name">School Ball </h3>
        
-        <span class="pc-cta">Book Now →</span>
+    
       </div>
     </div>
     <div class="promo-card">
@@ -626,7 +624,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
         <div class="pc-badge"><span class="dot"></span>Seasonal</div>
         <h3 class="pc-name">Christmas Package</h3>
         
-        <span class="pc-cta">Learn More →</span>
+    
       </div>
     </div>
   </div>

@@ -708,7 +708,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
   }
  
   .lhec-ft-addr {
-    font-size: .86rem;
+    font-size: .97rem;
     color: var(--muted);
     line-height: 2;
     margin-bottom: 22px;
@@ -789,7 +789,7 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
     display: block;
     color: var(--muted);
     text-decoration: none;
-    font-size: .86rem;
+    font-size: .97rem;
     font-weight: 300;
     padding: 6px 0;
     border-bottom: 1px solid rgba(184,151,90,.04);

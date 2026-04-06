@@ -475,11 +475,10 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
     background-size: cover;
     transition: transform .62s ease;
   }
-  .promo-card.tall         .pc-bg { background-image:url('daydeli.jpg'); background-position: center 25%; }
-  .promo-card:nth-child(2) .pc-bg { background-image:url('daydeli.jpg'); background-position: center 25%; }
-  .promo-card:nth-child(3) .pc-bg { background-image:url('wedding.jpg'); background-position: 88% 35%; }
-  .promo-card:nth-child(5) .pc-bg { background-image:url('christmas.jpg'); background-position: 65% 12%; }
-  .promo-card:nth-child(4) .pc-bg { background-image:url('schollball.jpg'); background-position: 45% 65%; }
+ .vg-card:nth-child(1) .vg-img { background-image:url('images/hero-gallery.jpg'); ... }
+.vg-card:nth-child(2) .vg-img { background-image:url('images/townhall-home.jpeg'); ... }
+.vg-card:nth-child(3) .vg-img { background-image:url('images/Meeting Room.jpg'); ... }
+.vg-card:nth-child(4) .vg-img { background-image:url('images/Artium.jpg'); ... }
 
   .promo-card:hover .pc-bg { transform: scale(1.07); }
 

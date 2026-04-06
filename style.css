@@ -475,10 +475,10 @@ body { background: var(--ink); color: var(--cream); font-family: 'Jost', sans-se
     background-size: cover;
     transition: transform .62s ease;
   }
- .vg-card:nth-child(1) .vg-img { background-image:url('images/hero-gallery.jpg'); ... }
-.vg-card:nth-child(2) .vg-img { background-image:url('images/townhall-home.jpeg'); ... }
-.vg-card:nth-child(3) .vg-img { background-image:url('images/Meeting Room.jpg'); ... }
-.vg-card:nth-child(4) .vg-img { background-image:url('images/Artium.jpg'); ... }
+ .vg-card:nth-child(1) .vg-img { background-image:url('hero-gallery.jpg'); ... }
+.vg-card:nth-child(2) .vg-img { background-image:url('townhall-home.jpeg'); ... }
+.vg-card:nth-child(3) .vg-img { background-image:url('Meeting Room.jpg'); ... }
+.vg-card:nth-child(4) .vg-img { background-image:url('Artium.jpg'); ... }
 
   .promo-card:hover .pc-bg { transform: scale(1.07); }
 

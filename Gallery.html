@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" href="style.css">
+<title>LHEC- Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<!-- ═══════════════════════════════════════════
+     SHARED NAV (WordPress: one include)
+═══════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo-wrap">
+    <img src="https://amayaliving.co.nz/wp-content/uploads/2025/12/5-2.png" alt="Lower Hutt Events Centre"/>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#"  class="active-page" >Home</a></li>
+    <li>
+      <a href="#" class="">Plan Your Event</a>
+      <ul class="dropdown">
+        <li><a href="#">Conferencing & Events</a></li>
+        <li><a href="#">Indian Weddings</a></li>
+        <li>
+          <a href="#">Packages ›</a>
+          <ul class="sub-dropdown">
+            <li><a href="#">All Packages</a></li>
+            <li><a href="#">Day Delegate</a></li>
+            <li><a href="#">Wedding</a></li>
+            <li><a href="#">School Ball</a></li>
+            <li><a href="#">Christmas</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Food & Beverage ›</a>
+          <ul class="sub-dropdown">
+            <li><a href="#">Catering</a></li>
+            <li><a href="#">Tūtaki Café</a></li>
+            <li><a href="#">Grazie Restaurant</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Equipment & Technology</a></li>
+        <li><a href="#">Transport</a></li>
+        <li><a href="#">Accommodation</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#">Venue</a>
+      <ul class="dropdown">
+        <li><a href="EventSpace.html">Event Space</a></li>
+        <li><a href="TownHall.html">Town Hall</a></li>
+        <li><a href="MeetingRooms.html">Meeting Rooms</a></li>
+        <li><a href="Atrium.html">Atrium</a></li>
+        <li><a href="TūtakiCafé.html">Tūtaki Café</a></li>
+        <li><a href="Accommodation.html">Accommodation</a></li>
+        <li><a href="FAQs.html">FAQs</a></li>
+      </ul>
+    </li>
+    <li><a href="whtason.HTML">What's On</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li>
+      <a href="about.html">About</a>
+    </li>
+    <li>
+      <a href="Contact.html">Contact</a>
+    </li>
+    <li><a href="#">CSR</a></li>
+  </ul>
+  <div class="nav-cta-wrap">
+    <a href="Contact.html" class="nav-cta">Enquire Now</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════
+     PAGE 10 — GALLERY
+══════════════════════════════════════════════════════════ -->
+<div id="page-gallery">
+  <section class="inner-hero">
+    <div class="ih-bg" style="background-position:center 35%"></div>
+    <div class="ih-overlay"></div>
+    <div class="ih-content">
+      <div class="ih-breadcrumb"><a href="#">Home</a> · <span>Gallery</span></div>
+      <div class="ih-eyebrow anim-up">Visual Tour</div>
+      <h1 class="ih-h1 anim-up2">Our <em>Gallery</em></h1>
+      
+    </div>
+  </section>
+
+<!-- ══ MAIN FILTER TABS ══ -->
+<div class="events-filter" id="mainTabs">
+  <button class="ef-btn active" data-cat="all">All <span class="ef-count" id="cnt-all">0</span></button>
+  <button class="ef-btn" data-cat="event-space">Conference <span class="ef-count" id="cnt-event-space">0</span></button>
+  <button class="ef-btn" data-cat="town-hall">Corporate Dinners <span class="ef-count" id="cnt-town-hall">0</span></button>
+  <button class="ef-btn" data-cat="meeting-rooms">Expos <span class="ef-count" id="cnt-meeting-rooms">0</span></button>
+  <button class="ef-btn" data-cat="atrium">Social Events <span class="ef-count" id="cnt-atrium">0</span></button>
+  <button class="ef-btn" data-cat="weddings">Weddings <span class="ef-count" id="cnt-weddings">0</span></button>
+  
+</div>
+ 
+<!-- ══ SUB FILTER TABS (shown per category) ══ -->
+<div class="sub-filter-wrap" id="subFilterWrap">
+  <div class="sub-filter" id="subTabs"></div>
+</div>
+ 
+<!-- ══ GALLERY ══ -->
+<section class="gallery-section">
+  <div class="gallery-meta">
+    <p class="gallery-count">Showing <span id="showCount">0</span> images</p>
+    <div class="gallery-view-toggle">
+      <button class="gvt-btn active" id="gridBtn" title="Grid view">⊞</button>
+      <button class="gvt-btn" id="listBtn" title="Compact view">≡</button>
+    </div>
+  </div>
+ 
+  <div class="gallery-grid reveal" id="galleryGrid"></div>
+</section>
+ 
+<!-- ══ LIGHTBOX ══ -->
+<div id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+ 
+  <div class="lb-img-wrap">
+    <button class="lb-arrow lb-prev" id="lbPrev">&#8592;</button>
+    <div class="lb-img active" id="lbImg"></div>
+    <button class="lb-arrow lb-next" id="lbNext">&#8594;</button>
+  </div>
+ 
+  <div class="lb-footer">
+    <p class="lb-counter"><span id="lbCurrent">1</span> / <span id="lbTotal">1</span></p>
+    <p class="lb-caption-text" id="lbCaption"></p>
+    <div class="lb-dots" id="lbDots"></div>
+  </div>
+  <p class="lb-hint">← → navigate &nbsp;·&nbsp; ESC close</p>
+</div>
+ 
+<script>
+/* ════════════════════════════════════════════════
+   DATA — each image has: url, cat, sub, caption, layout
+════════════════════════════════════════════════ */
+const DATA = [
+  /* ─ EVENT SPACE ─ */
+  { url:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80', cat:'event-space', sub:'setup',    caption:'Grand Hall — Banquet Setup',           layout:'wide tall' },
+  { url:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=80', cat:'event-space', sub:'setup',    caption:'Event Hall — Theatre Style',           layout:'' },
+  { url:'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&q=80', cat:'event-space', sub:'cocktail', caption:'Cocktail Reception',                   layout:'' },
+  { url:'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1200&q=80', cat:'event-space', sub:'cocktail', caption:'Evening Networking Function',           layout:'wide' },
+  { url:'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80', cat:'event-space', sub:'gala',     caption:'Black Tie Gala Dinner',                layout:'' },
+  { url:'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=1200&q=80', cat:'event-space', sub:'gala',     caption:'Awards Night Stage',                   layout:'tall' },
+ 
+  /* ─ TOWN HALL ─ */
+  { url:'https://images.unsplash.com/photo-1431540015161-0bf868a2d407?w=1200&q=80', cat:'town-hall',   sub:'full',     caption:'Town Hall — Full Capacity',            layout:'wide tall' },
+  { url:'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80', cat:'town-hall',   sub:'full',     caption:'Grand Stage & Seating',                layout:'' },
+  { url:'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&q=80', cat:'town-hall',   sub:'stage',    caption:'Presentation Stage',                   layout:'' },
+  { url:'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=1200&q=80', cat:'town-hall',   sub:'stage',    caption:'Keynote Speaker Setup',                layout:'wide' },
+  { url:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80', cat:'town-hall',   sub:'foyer',    caption:'Town Hall Foyer',                      layout:'' },
+ 
+  /* ─ MEETING ROOMS ─ */
+  { url:'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80', cat:'meeting-rooms', sub:'boardroom', caption:'Executive Boardroom',              layout:'wide' },
+  { url:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&q=80', cat:'meeting-rooms', sub:'boardroom', caption:'Boardroom — River View',           layout:'tall' },
+  { url:'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80', cat:'meeting-rooms', sub:'training',  caption:'Training Suite',                    layout:'' },
+  { url:'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80', cat:'meeting-rooms', sub:'training',  caption:'Workshop Setup',                    layout:'' },
+  { url:'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1200&q=80', cat:'meeting-rooms', sub:'break-out', caption:'Break-Out Space',                   layout:'wide' },
+ 
+  /* ─ ATRIUM ─ */
+  { url:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80', cat:'atrium', sub:'day',     caption:'Atrium — Natural Light',                  layout:'wide tall' },
+  { url:'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=1200&q=80', cat:'atrium', sub:'day',     caption:'Glass Ceiling Feature',                     layout:'' },
+  { url:'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=1200&q=80', cat:'atrium', sub:'evening', caption:'Atrium Evening Ambience',                 layout:'' },
+  { url:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80', cat:'atrium', sub:'evening', caption:'Candlelit Atrium Function',               layout:'wide' },
+  { url:'https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=1200&q=80', cat:'atrium', sub:'garden',  caption:'Outdoor Atrium Garden',                  layout:'' },
+ 
+  /* ─ WEDDINGS ─ */
+  { url:'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80', cat:'weddings', sub:'ceremony',  caption:'Garden Ceremony Setup',               layout:'wide tall' },
+  { url:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80', cat:'weddings', sub:'ceremony',  caption:'Aisle & Floral Arch',                 layout:'' },
+  { url:'https://images.unsplash.com/photo-1529636798458-92182e662485?w=1200&q=80', cat:'weddings', sub:'reception', caption:'Reception Dinner — Hall Dressed',      layout:'' },
+  { url:'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=1200&q=80', cat:'weddings', sub:'reception', caption:'Wedding Cake & Table Centrepiece',     layout:'wide' },
+  { url:'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80', cat:'weddings', sub:'indian',    caption:'Indian Wedding — Grand Mandap',        layout:'tall' },
+  { url:'https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=1200&q=80', cat:'weddings', sub:'indian',    caption:'Sangeet Night — Dance Floor',          layout:'' },
+ 
+  /* ─ DINING ─ */
+  { url:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80', cat:'dining', sub:'grazie',  caption:'Grazie Italian Restaurant',               layout:'wide tall' },
+  { url:'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=1200&q=80', cat:'dining', sub:'grazie',  caption:'Pasta & Fine Dining',                     layout:'' },
+  { url:'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1200&q=80', cat:'dining', sub:'tutaki',  caption:'Tūtaki Café — Morning Service',           layout:'' },
+  { url:'https://images.unsplash.com/photo-1493770348161-369560ae357d?w=1200&q=80', cat:'dining', sub:'tutaki',  caption:'Tūtaki Café — Specialty Coffee',           layout:'wide' },
+  { url:'https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&q=80', cat:'dining', sub:'catering', caption:'Event Catering — Canapes',               layout:'' },
+  { url:'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=1200&q=80', cat:'dining', sub:'catering', caption:'Catering — Buffet Service',             layout:'tall' },
+];
+ 
+/* sub-tab labels per category */
+const SUBS = {
+  'event-space':    { setup:'Event Space', cocktail:'Meeting Rooms', gala:'Townhall' },
+ /* 'town-hall':      { full:'Full Hall', stage:'Stage', foyer:'Foyer' },*/
+  'meeting-rooms':  { boardroom:'Event Space', training:'Town Hall' },
+/*  'atrium':         { day:'Daytime', evening:'Evening', garden:'Garden' },*/
+  'weddings':       { ceremony:'Event Space', reception:'Meeting Rooms', indian:'Townhall' },
+  'dining':         { grazie:'Grazie', tutaki:'Tūtaki Café', catering:'Catering' },
+};
+ 
+/* ── STATE ── */
+let activeCat = 'all';
+let activeSub = 'all';
+let lightboxItems = [];
+let lbIndex = 0;
+ 
+/* ── DOM refs ── */
+const grid       = document.getElementById('galleryGrid');
+const showCount  = document.getElementById('showCount');
+const subWrap    = document.getElementById('subFilterWrap');
+const subTabsEl  = document.getElementById('subTabs');
+const lightbox   = document.getElementById('lightbox');
+const lbImg      = document.getElementById('lbImg');
+const lbCurrent  = document.getElementById('lbCurrent');
+const lbTotal    = document.getElementById('lbTotal');
+const lbCaption  = document.getElementById('lbCaption');
+const lbDots     = document.getElementById('lbDots');
+ 
+/* ── UPDATE COUNTS ── */
+function updateCounts() {
+  const cats = ['all','event-space','town-hall','meeting-rooms','atrium','weddings','dining'];
+  cats.forEach(c => {
+    const el = document.getElementById('cnt-' + c);
+    if (el) el.textContent = c === 'all' ? DATA.length : DATA.filter(d => d.cat === c).length;
+  });
+}
+ 
+/* ── BUILD SUB-TABS ── */
+function buildSubTabs(cat) {
+  subTabsEl.innerHTML = '';
+  if (cat === 'all' || !SUBS[cat]) {
+    subWrap.classList.remove('visible');
+    return;
+  }
+  const subs = SUBS[cat];
+ 
+  /* All sub button */
+  const allBtn = document.createElement('button');
+  allBtn.className = 'sf-btn active';
+  allBtn.dataset.sub = 'all';
+  allBtn.textContent = 'All';
+  allBtn.addEventListener('click', () => setSubTab('all'));
+  subTabsEl.appendChild(allBtn);
+ 
+  Object.entries(subs).forEach(([key, label]) => {
+    const btn = document.createElement('button');
+    btn.className = 'sf-btn';
+    btn.dataset.sub = key;
+    btn.textContent = label;
+    btn.addEventListener('click', () => setSubTab(key));
+    subTabsEl.appendChild(btn);
+  });
+ 
+  subWrap.classList.add('visible');
+}
+ 
+function setSubTab(sub) {
+  activeSub = sub;
+  subTabsEl.querySelectorAll('.sf-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.sub === sub);
+  });
+  renderGrid();
+}
+ 
+/* ── RENDER GRID ── */
+function renderGrid() {
+  const filtered = DATA.filter(d => {
+    if (activeCat !== 'all' && d.cat !== activeCat) return false;
+    if (activeSub !== 'all' && d.sub !== activeSub) return false;
+    return true;
+  });
+ 
+  showCount.textContent = filtered.length;
+  lightboxItems = filtered;
+ 
+  grid.innerHTML = '';
+  filtered.forEach((item, i) => {
+    const cell = document.createElement('div');
+    cell.className = 'g-cell' + (item.layout ? ' ' + item.layout : '');
+    cell.style.animationDelay = (i * 55) + 'ms';
+ 
+    cell.innerHTML = `
+      <div class="g-img" style="background-image:url('${item.url}')"></div>
+      <div class="g-ov">
+        <span class="g-plus">+</span>
+        <span class="g-caption">${item.caption}</span>
+      </div>
+      <span class="g-tag">${item.cat.replace('-', ' ')}</span>
+    `;
+    cell.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(cell);
+  });
+ 
+  /* trigger reveal */
+  const g = document.querySelector('.gallery-grid');
+  if (g) setTimeout(() => g.classList.add('in'), 50);
+}
+ 
+/* ── MAIN TAB CLICK ── */
+document.querySelectorAll('.ef-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeCat = btn.dataset.cat;
+    activeSub = 'all';
+    document.querySelectorAll('.ef-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    buildSubTabs(activeCat);
+    renderGrid();
+  });
+});
+ 
+/* ─────────────────────────────────
+   LIGHTBOX
+───────────────────────────────── */
+function openLightbox(index) {
+  lbIndex = index;
+  renderLbDots();
+  showLbImage(index, null);
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+ 
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+ 
+function showLbImage(idx, direction) {
+  const item = lightboxItems[idx];
+  if (!item) return;
+ 
+  lbCurrent.textContent = idx + 1;
+  lbTotal.textContent   = lightboxItems.length;
+  lbCaption.textContent = item.caption;
+ 
+  if (direction === null) {
+    lbImg.style.backgroundImage = `url('${item.url}')`;
+    lbImg.className = 'lb-img active';
+  } else {
+    /* slide animation */
+    const exitClass  = direction === 'next' ? 'exit-left'  : 'exit-right';
+    const enterClass = direction === 'next' ? 'enter-left' : 'enter-right';
+ 
+    lbImg.classList.add(exitClass);
+ 
+    setTimeout(() => {
+      lbImg.style.backgroundImage = `url('${item.url}')`;
+      lbImg.className = 'lb-img ' + enterClass;
+      void lbImg.offsetWidth;
+      lbImg.className = 'lb-img active';
+    }, 180);
+  }
+ 
+  /* update dots */
+  lbDots.querySelectorAll('.lb-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === idx);
+  });
+}
+ 
+function renderLbDots() {
+  lbDots.innerHTML = '';
+  /* only show dots if ≤ 16 items (avoid clutter) */
+  if (lightboxItems.length > 16) return;
+  lightboxItems.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'lb-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => { lbIndex = i; showLbImage(i, null); });
+    lbDots.appendChild(d);
+  });
+}
+ 
+function lbNav(dir) {
+  const total = lightboxItems.length;
+  lbIndex = (lbIndex + dir + total) % total;
+  showLbImage(lbIndex, dir === 1 ? 'next' : 'prev');
+}
+ 
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
+document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
+ 
+lightbox.addEventListener('click', e => {
+  if (e.target === lightbox) closeLightbox();
+});
+ 
+document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape')      closeLightbox();
+  if (e.key === 'ArrowRight')  lbNav(1);
+  if (e.key === 'ArrowLeft')   lbNav(-1);
+});
+ 
+/* swipe support */
+let touchStartX = 0;
+lightbox.addEventListener('touchstart', e => touchStartX = e.touches[0].clientX, {passive:true});
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1);
+}, {passive:true});
+ 
+/* ── VIEW TOGGLE ── */
+document.getElementById('gridBtn').addEventListener('click', () => {
+  document.getElementById('gridBtn').classList.add('active');
+  document.getElementById('listBtn').classList.remove('active');
+  grid.style.gridAutoRows = '220px';
+});
+document.getElementById('listBtn').addEventListener('click', () => {
+  document.getElementById('listBtn').classList.add('active');
+  document.getElementById('gridBtn').classList.remove('active');
+  grid.style.gridAutoRows = '140px';
+});
+ 
+/* ── SCROLL REVEAL ── */
+const revObs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) e.target.classList.add('in');
+}), { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+ 
+/* ── INIT ── */
+updateCounts();
+renderGrid();
+</script>
+
+<!-- ═══ LHEC FOOTER ═══ -->
+<footer class="lhec-footer">
+ 
+  <!-- main grid -->
+  <div class="lhec-ft-grid">
+ 
+    <!-- col 1 — brand -->
+    <div class="lhec-ft-col lhec-reveal lhec-d1">
+      <img
+        src="https://amayaliving.co.nz/wp-content/uploads/2025/12/5-2.png"
+        class="lhec-ft-logo"
+        alt="Lower Hutt Events Centre"
+      />
+      <p class="lhec-ft-addr">
+        <strong>Find Us</strong>
+        30c Laings Road<br>
+        Lower Hutt, Wellington<br>
+        New Zealand
+      </p>
+      <a href="tel:+6445688120" class="lhec-ft-phone">+64 4 568 8120</a>
+      <div class="lhec-ft-social">
+        <a href="#" aria-label="Facebook">Fb</a>
+        <a href="#" aria-label="Instagram">Ig</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+ 
+    <!-- col 2 — Plan Your Event -->
+    <div class="lhec-ft-col lhec-reveal lhec-d2">
+      <p class="lhec-ft-heading">Plan Your Event</p>
+      <ul class="lhec-ft-links">
+        <li><a href="#">Conferencing &amp; Events</a></li>
+        <li><a href="#">Indian Weddings</a></li>
+        <li><a href="#">Packages</a></li>
+        <li><a href="#">Food &amp; Beverage</a></li>
+        <li><a href="#">Equipment &amp; Tech</a></li>
+        <li><a href="#">Transport</a></li>
+        <li><a href="#">Accommodation</a></li>
+        <li><a href="#">FAQs</a></li>
+      </ul>
+    </div>
+ 
+    <!-- col 3 — Venue -->
+    <div class="lhec-ft-col lhec-reveal lhec-d3">
+      <p class="lhec-ft-heading">Venue</p>
+      <ul class="lhec-ft-links">
+        <li><a href="#">Event Space</a></li>
+        <li><a href="#">Town Hall</a></li>
+        <li><a href="#">Meeting Rooms</a></li>
+        <li><a href="#">Atrium</a></li>
+        <li><a href="#">Tūtaki Café</a></li>
+        <li><a href="#">Grazie Restaurant</a></li>
+        <li><a href="#">Sebel Hotel</a></li>
+      </ul>
+    </div>
+ 
+    <!-- col 4 — About -->
+    <div class="lhec-ft-col lhec-reveal lhec-d4">
+      <p class="lhec-ft-heading">About</p>
+      <ul class="lhec-ft-links">
+        <li><a href="#">What's On</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Meet the Team</a></li>
+        <li><a href="#">Te Awakairangi</a></li>
+        <li><a href="#">Testimonials</a></li>
+        <li><a href="#">Contact Details</a></li>
+        <li><a href="#">Getting Here</a></li>
+        <li><a href="#">Enquiry Form</a></li>
+      </ul>
+    </div>
+ 
+  </div>
+ 
+  <!-- bottom bar -->
+  <div class="lhec-ft-bottom">
+    <p class="lhec-ft-copy">© 2025 Lower Hutt Events Centre. All rights reserved.</p>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span class="lhec-ft-badge">QualMark Gold</span>
+      <span class="lhec-ft-badge">BEIA Silver Member</span>
+    </div>
+  </div>
+ 
+</footer>
+ 
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('lhec-in'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.lhec-reveal').forEach(el => obs.observe(el));
+</script>

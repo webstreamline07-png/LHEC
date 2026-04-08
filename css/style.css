@@ -1,5 +1,3 @@
-
-<style>
 /* ═══════════════════════════════════════════
    DESIGN TOKENS — matches homepage exactly
 ═══════════════════════════════════════════ */
@@ -373,7 +371,7 @@ nav {
 .testi-event { font-size: .66rem; color: var(--muted); letter-spacing: .08em; }
 
 /* -- GALLERY MASONRY -- */
-.gallery-section { background: var(--section-dark); padding: 88px 60px; }
+.gallery-section { background: #ffffff; padding: 88px 60px; }
 .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 220px; gap: 3px; }
 .gallery-grid .g-cell { overflow: hidden; cursor: pointer; position: relative; }
 .gallery-grid .g-cell.wide { grid-column: span 2; }
